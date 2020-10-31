@@ -1,11 +1,13 @@
 import express from 'express';
-import { create } from './models/crud';
+import adminRouter from './controllers';
 
 const app = express();
 
 const PORT = process.env.PORT ?? 3000;
 
 app.use(express.json());
+
+app.use('/admin', adminRouter)
 
 app.get('/', (req, res) => res.send('Hello World'));
 
