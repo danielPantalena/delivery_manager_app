@@ -14,4 +14,7 @@ adminRouter.get('/', (_req, res) =>
   crud.readAll('admin').then((collection) => res.status(200).json(collection))
 );
 
+adminRouter.delete('/:id', async ({ params: { id } }, res) => {
+});
+
 export default adminRouter;
