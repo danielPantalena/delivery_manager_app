@@ -23,7 +23,7 @@ router.post(
   '/login',
   authenticateUser,
   authenticateToken,
-  async ({ body: { user }, baseUrl, cookies: { token } }, res) => {
+  async ({ body: { user, token }, baseUrl }, res) => {
     res
       .cookie('online', true)
       .status(200)
@@ -31,7 +31,9 @@ router.post(
   }
 );
 
-router.post('/logout', async (req, res) => res.clearCookie('token').sendStatus(204));
+router.post('/logout', async ({ baseUrl }, res) =>
+  res.cookie('online', false).clearCookie('token').status(204).redirect(baseUrl)
+);
 
 router.get('/', ({ baseUrl }, res) =>
   crud

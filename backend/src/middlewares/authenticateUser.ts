@@ -5,13 +5,13 @@ import { readOneByUser } from '../models/crud';
 import { errorResponse, generateToken, verifyToken } from '../helpers';
 
 const authenticateUser = async (
-  { body: { user, password }, baseUrl }: Request,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {
+  const { body: { user, password }, baseUrl } = req;
   try {
 
-    
     const registeredUser = await readOneByUser(baseUrl.substring(1), user);
     
     if (!registeredUser) return res.status(400).json(errorResponse('Usuário não encontrado'));
@@ -24,11 +24,11 @@ const authenticateUser = async (
     
     if (!passwordIsValid) return res.status(401).json(errorResponse('Senha incorreta'));
     
-    const token = await generateToken(_id);
+    const token = generateToken(_id);
 
-    console.log('user', token)
-    
-    await res.cookie('token', token);
+    req.body.token = token;
+
+    res.cookie('token', token);
     
     return next();
   } catch ({ message }) {
