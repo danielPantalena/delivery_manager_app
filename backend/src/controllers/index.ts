@@ -1,3 +1,3 @@
-import adminRouter from './adminControllers';
+import router from './controllers';
 
-export default adminRouter;
+export default router;
