@@ -2,7 +2,9 @@ import { ObjectId } from 'mongodb';
 import connection from './connection';
 
 export const create = (collection: string, document: object) =>
-  connection().then((db) => db.collection(collection).insertOne(document));
+  connection()
+    .then((db) => db.collection(collection).insertOne(document))
+    .then((createdDoc) => createdDoc.ops[0]);
 
 export const readAll = (collection: string) =>
   connection().then((db) => db.collection(collection).find().toArray());
