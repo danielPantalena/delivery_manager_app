@@ -22,17 +22,9 @@ export const updateById = (collection: string, id: string, update: object) => {
   );
 };
 
-export const updateByUser = (collection: string, user: string, update: object) =>
-  connection().then((db) => db.collection(collection).updateOne({ user }, { $set: update }));
-
 export const deleteById = (collection: string, id: string) => {
   if (!ObjectId.isValid(id)) return null;
   return connection().then((db) =>
-    db
-      .collection(collection)
-      .findOneAndDelete({ _id: new ObjectId(id) })
+    db.collection(collection).findOneAndDelete({ _id: new ObjectId(id) })
   );
 };
-
-export const deleteByUser = (collection: string, user: string) =>
-  connection().then((db) => db.collection(collection).deleteOne({ user }));
