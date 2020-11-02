@@ -16,3 +16,5 @@ router.get('/delivery/actives', readAllToDelivery);
 router.get('/delivery/undelivered', readAllUndelivered);
 
 router.put('/delivery', assignDelivery);
+
+export default router;

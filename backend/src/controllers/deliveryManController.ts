@@ -10,3 +10,5 @@ const router = express.Router();
 router.get('/delivery', readAllUndelivered);
 
 router.put('/delivery', finishDelivery);
+
+export default router;
