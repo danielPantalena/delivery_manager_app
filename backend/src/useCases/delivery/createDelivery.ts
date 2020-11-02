@@ -5,6 +5,7 @@ import { create } from '../../models/crud';
 const createDelivery = async ({ body }: Request, res: Response) => {
   body.createdAt = Date.now();
   body.modifiedAt = body.createdAt;
+  body.delivered = false;
 
   return create('delivery', body)
     .then((createdDoc) => res.status(201).json(createdDoc))

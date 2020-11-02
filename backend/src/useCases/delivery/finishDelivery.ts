@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import { errorResponse } from '../../helpers';
 import { updateById } from '../../models/crud';
 
-const finishDelivery = async ({ body: { deliveryId } }: Request, res: Response) => {
+const finishDelivery = async ({ params: { id } }: Request, res: Response) => {
   try {
-    const result = await updateById('delivery', deliveryId, {
+    const result = await updateById('delivery', id, {
       delivered: true,
       modifiedAt: Date.now(),
     });

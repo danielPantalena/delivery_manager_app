@@ -1,7 +1,5 @@
 import express from 'express';
-import bcrypt from 'bcrypt';
-import { readAll, readOneById } from '../models/crud';
-import { authenticateUser, authenticateToken, validateUser } from '../middlewares';
+import { authenticateToken } from '../middlewares';
 import {
   assignDelivery,
   createDelivery,
@@ -12,14 +10,14 @@ import {
 
 const router = express.Router();
 
-router.post('/delivery', createDelivery);
+router.post('/', authenticateToken, createDelivery);
 
-router.get('/delivery', readAllDeliveries);
+router.get('/', authenticateToken, readAllDeliveries);
 
-router.get('/delivery/actives', readAllToDelivery);
+router.get('/actives', authenticateToken, readAllToDelivery);
 
-router.get('/delivery/undelivered', readAllUndelivered);
+router.get('/undelivered', authenticateToken, readAllUndelivered);
 
-router.put('/delivery', assignDelivery);
+router.put('/', authenticateToken, assignDelivery);
 
 export default router;

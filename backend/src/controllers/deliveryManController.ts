@@ -1,14 +1,11 @@
 import express from 'express';
-import bcrypt from 'bcrypt';
-import { readAll, readOneById } from '../models/crud';
-import { authenticateUser, authenticateToken, validateUser } from '../middlewares';
-import { assignDelivery, createDelivery, finishDelivery, readAllToDelivery, readAllUndelivered } from '../useCases';
-import readAllDeliveries from '../useCases/readAllDeliveries';
+import { authenticateToken } from '../middlewares';
+import { finishDelivery, readAllUndelivered } from '../useCases';
 
 const router = express.Router();
 
-router.get('/delivery', readAllUndelivered);
+router.get('/', authenticateToken, readAllUndelivered);
 
-router.put('/delivery', finishDelivery);
+router.put('/:id', authenticateToken, finishDelivery);
 
 export default router;

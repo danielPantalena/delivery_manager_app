@@ -1,52 +1,15 @@
 import express from 'express';
-import bcrypt from 'bcrypt';
-import * as crud from '../models/crud';
-import { authenticateUser, authenticateToken, validateUser } from '../middlewares';
-import { errorResponse, generateToken } from '../helpers';
+import { authenticateToken } from '../middlewares';
+import { createDelivery, readAllDeliveries, updateDelivery, deleteDelivery } from '../useCases';
 
 const router = express.Router();
 
-router.post(
-  '/login',
-  authenticateUser,
-  authenticateToken,
-  async ({ body: { user, token }, baseUrl }, res) => {
-    res
-      .cookie('online', true)
-      .status(200)
-      .json({ user, type: baseUrl.substring(1), token });
-  }
-);
+router.post('/', authenticateToken, createDelivery);
 
-router.post('/logout', async (_req, res) =>
-  res.cookie('online', false).clearCookie('token').status(204).redirect('/')
-);
+router.get('/', authenticateToken, readAllDeliveries);
 
-router.get('/', ({ baseUrl }, res) =>
-  crud
-    .readAll(baseUrl.substring(1))
-    .then((collection) => res.status(200).json(collection))
-    .catch(({ message }) => res.status(500).json(errorResponse(message)))
-);
+router.put('/:id', authenticateToken, updateDelivery);
 
-router.get('/:id', async ({ params: { id }, baseUrl }, res) => {
-  try {
-    const result = await crud.readOneById(baseUrl.substring(1), id);
-    if (result) return res.status(200).json(result);
-    return res.status(404).json(errorResponse('No user found'));
-  } catch ({ message }) {
-    return res.status(500).json(errorResponse(message));
-  }
-});
-
-router.delete('/:id', async ({ params: { id }, baseUrl }, res) => {
-  try {
-    const result = await crud.deleteById(baseUrl.substring(1), id);
-    if (result?.value) return res.status(200).json(result.value);
-    return res.status(404).json(errorResponse('No user found'));
-  } catch ({ message }) {
-    return res.status(500).json(errorResponse(message));
-  }
-});
+router.delete('/:id', authenticateToken, deleteDelivery);
 
 export default router;

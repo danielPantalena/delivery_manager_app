@@ -26,7 +26,7 @@ export const updateById = (collection: string, id: string, update: object) => {
 
 export const deleteById = (collection: string, id: string) => {
   if (!ObjectId.isValid(id)) return null;
-  return connection().then((db) =>
-    db.collection(collection).findOneAndDelete({ _id: new ObjectId(id) })
-  );
+  return connection()
+    .then((db) => db.collection(collection).findOneAndDelete({ _id: new ObjectId(id) }))
+    .then((result) => result.value);
 };
