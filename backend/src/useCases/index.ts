@@ -1,6 +1,6 @@
-export { default as assignDelivery } from './assignDelivery';
-export { default as finishDelivery } from './finishDelivery';
-export { default as createDelivery } from './createDelivery';
-export { default as readAllUndelivered } from './readAllUndelivered';
-export { default as readAllDeliveries } from './readAllDeliveries';
-export { default as readAllToDelivery } from './readAllToDelivery';
+export { default as assignDelivery } from './delivery/assignDelivery';
+export { default as finishDelivery } from './delivery/finishDelivery';
+export { default as createDelivery } from './delivery/createDelivery';
+export { default as readAllUndelivered } from './delivery/readAllUndelivered';
+export { default as readAllDeliveries } from './delivery/readAllDeliveries';
+export { default as readAllToDelivery } from './delivery/readAllToDelivery';

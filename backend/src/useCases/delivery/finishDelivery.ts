@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { errorResponse } from '../helpers';
-import { updateById } from '../models/crud';
+import { errorResponse } from '../../helpers';
+import { updateById } from '../../models/crud';
 
 const finishDelivery = async ({ body: { deliveryId } }: Request, res: Response) => {
   try {

@@ -1,8 +1,12 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-import router from './controllers/adminController';
-import { adminController, separatorController, deliveryManController } from './controllers';
+import {
+  adminController,
+  separatorController,
+  deliveryManController,
+  registerUserController,
+} from './controllers';
 
 dotenv.config();
 
@@ -13,6 +17,7 @@ const PORT = process.env.PORT ?? 3000;
 app.use(express.json());
 app.use(cookieParser());
 
+app.use('/register', registerUserController);
 app.use('/admin', adminController);
 app.use('/separator', separatorController);
 app.use('/deliveryman', deliveryManController);

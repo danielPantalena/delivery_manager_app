@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { errorResponse } from '../helpers';
-import { updateById } from '../models/crud';
+import { errorResponse } from '../../helpers';
+import { updateById } from '../../models/crud';
 
 const assignDelivery = async ({ body: { deliveryId, deliveryMan } }: Request, res: Response) => {
   const modifiedAt = Date.now();

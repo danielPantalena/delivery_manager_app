@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { errorResponse } from '../helpers';
-import { create } from '../models/crud';
+import { errorResponse } from '../../helpers';
+import { create } from '../../models/crud';
 
-const createDelivery = ({ body }: Request, res: Response) => {
+const createDelivery = async ({ body }: Request, res: Response) => {
   body.createdAt = Date.now();
   body.modifiedAt = body.createdAt;
 

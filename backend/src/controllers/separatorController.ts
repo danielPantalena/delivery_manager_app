@@ -2,8 +2,13 @@ import express from 'express';
 import bcrypt from 'bcrypt';
 import { readAll, readOneById } from '../models/crud';
 import { authenticateUser, authenticateToken, validateUser } from '../middlewares';
-import { assignDelivery, createDelivery, readAllToDelivery, readAllUndelivered } from '../useCases';
-import readAllDeliveries from '../useCases/readAllDeliveries';
+import {
+  assignDelivery,
+  createDelivery,
+  readAllDeliveries,
+  readAllToDelivery,
+  readAllUndelivered,
+} from '../useCases';
 
 const router = express.Router();
 

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { errorResponse } from '../helpers';
-import { readAll } from '../models/crud';
+import { errorResponse } from '../../helpers';
+import { readAll } from '../../models/crud';
 
 const readAllDeliveries = (_req: Request, res: Response) =>
   readAll('delivery')

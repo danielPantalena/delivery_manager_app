@@ -3,11 +3,20 @@ import { readOneByUser } from '../models/crud';
 import { errorResponse } from '../helpers';
 
 const validateUser = async (
-  { body: { user, password }, baseUrl }: Request,
+  { body: { user, password, type }, baseUrl }: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const userRegistered = await readOneByUser(baseUrl.substring(1), user);
+  if (type !== 'admin' && type !== 'separator' && type !== 'deliveryman')
+    return res
+      .status(400)
+      .json(
+        errorResponse(
+          'O body da requisição deve conter a chave "type" com um destes valores: "admin", "separator" ou "deliveryman"'
+        )
+      );
+
+  const userRegistered = await readOneByUser(type, user);
 
   if (userRegistered)
     return res
