@@ -1,15 +1,18 @@
 import express from 'express';
 import bcrypt from 'bcrypt';
-import * as crud from '../models/crud';
+import { readAll, readOneById } from '../models/crud';
 import { authenticateUser, authenticateToken, validateUser } from '../middlewares';
-import { assignDelivery, createDelivery } from '../useCases';
+import { assignDelivery, createDelivery, readAllToDelivery, readAllUndelivered } from '../useCases';
+import readAllDeliveries from '../useCases/readAllDeliveries';
 
 const router = express.Router();
 
 router.post('/delivery', createDelivery);
 
-router.get('/delivery', (_req, res) => crud.readAll('delivery'));
+router.get('/delivery', readAllDeliveries);
 
-router.get('/delivery', (_req, res) => crud.readAll('delivery'));
+router.get('/delivery/actives', readAllToDelivery);
+
+router.get('/delivery/undelivered', readAllUndelivered);
 
 router.put('/delivery', assignDelivery);
